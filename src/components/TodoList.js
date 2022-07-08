@@ -1,15 +1,16 @@
 import React from "react";
 import TodoItemList from "./TodoItemList";
+import NewTodoForm from "./NewTodoForm";
 
-const TodoList = ({ todos = [{ text: "Hello" }] }) => { //passing dummy prop
-  return todos.map((todo) => {
-    return (
-      <div>
-        <h4>This is it</h4>
-        <TodoItemList key={todo} todo={todo} />
-      </div>
-    );
-  });
+const TodoList = ({ todos = [{ text: "Hello" }] }) => {
+  return (
+    <div>
+      <NewTodoForm />
+      {todos.map((todo, i) => {
+        return <TodoItemList key={i} todo={todo} />;
+      })}
+    </div>
+  );
 };
 
 export default TodoList;
