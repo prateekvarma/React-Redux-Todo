@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { createTodo } from "../actions";
 
-const NewTodoForm = () => {
+const NewTodoForm = ({ todos, onCreatePressed }) => {
   const [inputValue, setInputValue] = useState("");
 
   return (
@@ -10,9 +12,30 @@ const NewTodoForm = () => {
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
       />
-      <button>Create Todo</button>
+      <button
+        onClick={() => {
+          onCreatePressed(inputValue);
+          setInputValue("");
+        }}
+      >
+        Create Todo
+      </button>
     </div>
   );
 };
 
-export default NewTodoForm;
+const mapStateToProps = (state) => {
+  return {
+    todos: state.todos,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onCreatePressed: (text) => {
+      return dispatch(createTodo(text));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewTodoForm);
