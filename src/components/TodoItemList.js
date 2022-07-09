@@ -1,11 +1,11 @@
 import React from "react";
 
-const TodoItemList = ({ todo }) => {
+const TodoItemList = ({ todo, onRemovePressed }) => {
   return (
     <div>
         <p>{todo.text}</p>
         <button>Mark As Completed</button>
-        <button>Delete</button>
+        <button onClick={() => onRemovePressed(todo.text)}>Delete</button>
     </div>
   )
 };
